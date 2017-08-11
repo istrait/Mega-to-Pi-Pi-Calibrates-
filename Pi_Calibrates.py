@@ -8,14 +8,17 @@ import subprocess
 import math
 import csv
 
-
+"""Opens the calibration file and moves the data into 3 lists of information.  First list is list of sensor names, 
+Second is of slopes and the third is y-intercepts."""
 with open('calibrations.csv', 'rU') as f:  #opens PW file
     reader = csv.reader(f)
     # Print every value of every row and convert the strings to floats.
     calib_data = list(list(rec) for rec in csv.reader(f, delimiter=',')) #reads csv into a list of lists
     calib_data[1] = list(map(float, calib_data[1]))
     calib_data[2] = list(map(float, calib_data[2]))
-print(calib_data)
+    
+print(calib_data) #Prints the contents of the Calibrations.csv file and puts a blank line after it.
+print("")
 
 # Initialize and clear the lists needed for the program.
 raw_data = []
