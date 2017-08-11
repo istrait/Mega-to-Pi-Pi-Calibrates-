@@ -16,9 +16,9 @@ with open('calibrations.csv', 'rU') as f:  #opens PW file
     calib_data = list(list(rec) for rec in csv.reader(f, delimiter=',')) #reads csv into a list of lists
     calib_data[1] = list(map(float, calib_data[1]))
     calib_data[2] = list(map(float, calib_data[2]))
-    
+
 print(calib_data) #Prints the contents of the Calibrations.csv file and puts a blank line after it.
-print("")
+print('')
 
 # Initialize and clear the lists needed for the program.
 raw_data = []
@@ -62,7 +62,7 @@ while True:
         print(data) #Raw data from Arduino
         raw_data = [int(e) if e.isdigit() else e for e in data.split(',')] # Splits data into a list of numbers
         print(raw_data) # Shows raw numbers
-        submit_data = [float(raw_data[0]), float(raw_data[1])] #Ad the first two values to the data_submit string as they are already calibrated
+        submit_data = [raw_data[0], raw_data[1]] #Add the first two values to the data_submit string as they are already calibrated
 
 
         #for loop to iterate values to calculation function (remembering that the slope list does not include the first 3 values)
@@ -81,11 +81,13 @@ while True:
                                 print('Normal Calibration Function Activated')
                                 Calculate(calib_data[1][i], calib_data[2][i], raw_data[i+2])
 
+        # Create args - the list of data points and converts the numbers to strings
+        args = [str(x) for x in submit_data]
+        print(args)
 
         # Send to PHP file with arguments (Is a test file that shows in terminal for now)
         print('Result from Mohawk:')
-        print(submit_data)
-        subprocess.call(["php","-f","/var/www/html/db.php", str(submit_data[0]), str(submit_data[1]), str(submit_data[2]), str(submit_data[3]), str(submit_data[4]), str(submit_data[5]), str(submit_data[6])])
+        subprocess.call(['php','-f','/var/www/html/db.php'] + args) #Send to PHP file
 
         # Clear data lists
         del raw_data[:]
