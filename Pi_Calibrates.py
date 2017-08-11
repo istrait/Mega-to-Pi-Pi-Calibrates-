@@ -18,7 +18,7 @@ with open('calibrations.csv', 'rU') as f:  #opens PW file
     calib_data[2] = list(map(float, calib_data[2]))
 
 print(calib_data) #Prints the contents of the Calibrations.csv file and puts a blank line after it.
-print("")
+print('')
 
 # Initialize and clear the lists needed for the program.
 raw_data = []
