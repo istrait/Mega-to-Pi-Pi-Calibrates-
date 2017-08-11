@@ -59,7 +59,7 @@ while True:
         print(data) #Raw data from Arduino
         raw_data = [int(e) if e.isdigit() else e for e in data.split(',')] # Splits data into a list of numbers
         print(raw_data) # Shows raw numbers
-        submit_data = [raw_data[0], raw_data[1]] #Ad the first two values to the data_submit string as they are already calibrated
+        submit_data = [float(raw_data[0]), float(raw_data[1])] #Ad the first two values to the data_submit string as they are already calibrated
 
 
         #for loop to iterate values to calculation function (remembering that the slope list does not include the first 3 values)
@@ -82,9 +82,8 @@ while True:
         # Send to PHP file with arguments (Is a test file that shows in terminal for now)
         print('Result from Mohawk:')
         print(submit_data)
-        subprocess.call(["php","-f","/var/www/html/test.php", str(submit_data[0]), str(submit_data[1]), str(submit_data[2]), str(submit_data[3]), str(submit_data[4]), str(submit_data[5]), str(submit_data[6])])
+        subprocess.call(["php","-f","/var/www/html/db.php", str(submit_data[0]), str(submit_data[1]), str(submit_data[2]), str(submit_data[3]), str(submit_data[4]), str(submit_data[5]), str(submit_data[6])])
 
         # Clear data lists
         del raw_data[:]
         del submit_data[:]
-
