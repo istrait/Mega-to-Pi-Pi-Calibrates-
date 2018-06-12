@@ -15,6 +15,12 @@ DHT dht(DHTPIN, DHTTYPE);
   int sensor3Port = A2; //Pyranometer
   int sensor4Port = A3; //Humidity
   int sensor5Port = A4; //Barometer
+  int sensor6Port = A5; //
+  int sensor7Port = A6; //
+  int sensor8Port = A7; //
+  int sensor9Port = A8; //
+  int sensor10Port = A9; //
+  int sensorwindvane = A9;
 
 // Create the dataString
   String dataString;
@@ -32,7 +38,7 @@ void loop() {
   float t = dht.readTemperature();
 
     // Create the String to send to the Pi and send it
-    dataString = (String(t) + ',' + String(h) + ',' + String(analogRead(sensor1Port)) + ',' + String(analogRead(sensor2Port)) + ',' + String(analogRead(sensor3Port)) + ',' + String(analogRead(sensor4Port)) + ',' + String(analogRead(sensor5Port)));
+    dataString = (String(t) + ',' + String(h) + ',' + String(analogRead(sensor1Port)) + ',' + String(analogRead(sensor2Port)) + ',' + String(analogRead(sensor3Port)) + ',' + String(analogRead(sensor4Port)) + ',' + String(analogRead(sensor5Port)) + ',' + String(analogRead(sensor6Port)) + ',' + String(analogRead(sensor7Port)) + ',' + String(analogRead(sensor8Port)) + ',' + String(analogRead(sensor9Port)) + ',' + String(analogRead(sensor10Port)) '+' + String(analogRead(sensorwindvane)));
     Serial.println(dataString); 
     
     // Delay for 5 minutes
